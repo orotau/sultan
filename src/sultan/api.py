@@ -238,7 +238,7 @@ class Sultan(Base):
         Returns the chained commands that were built as a string.
         """
         context = self.current_context
-        SPECIAL_CASES = (Pipe, And, Redirect)
+        SPECIAL_CASES = (Pipe, And, Redirect, Or)
         output = ""
         for i, cmd in enumerate(self.commands):
 
@@ -298,6 +298,13 @@ class Sultan(Base):
             s.cat("/var/log/foobar.log").pipe().grep("192.168.1.1").run()
         """
         self._add(Pipe(self, '|'))
+        return self
+
+    def or_(self):
+        """
+        Combines multiple commands using `||`.
+        """
+        self._add(Or(self, "||"))
         return self
 
     def and_(self):
@@ -405,6 +412,18 @@ class And(BaseCommand):
     """
     def __call__(self):
 
+        pass # do nothing
+
+    def __str__(self):
+
+        return self.command
+
+class Or(BaseCommand):
+    """
+    Representation of the Or `||` operator.
+    """
+    def __call__(self):
+        
         pass # do nothing
 
     def __str__(self):

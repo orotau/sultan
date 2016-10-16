@@ -55,14 +55,19 @@ Suppose we want to cat out the contents of `/etc/hosts`, we'd do the following::
     with Sultan.load(cwd="/etc") as s:
         s.cat("hosts").run()
 
-Example 3: Compounding with And (&&)
-------------------------------------
+Example 3: Compounding with And (&&) and Or (||)
+------------------------------------------------
 
 There are times when we need multiple commands to run at once. We use the 
 `and_()` command to get through this. Here is an example::
 
     # runs: 'cd /tmp && touch foobar.txt'
     s.cd("/tmp").and_().touch("foobar.txt").run()
+
+We can also use the `or_()` command to get through this::
+
+    # runs: 'touch /tmp/foo || touch /tmp/bar;'
+    s.touch('/tmp/foo').or_().touch('/tmp/bar').run()
 
 Example 4: Redirecting with Pipes (|)
 -------------------------------------
