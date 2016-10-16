@@ -181,7 +181,7 @@ class Sultan(Base):
             stdout = subprocess.check_output(commands, shell=True, stderr=stderr)
             response = stdout.strip().split("\n") if stdout else stdout
             return response
-        except Exception, e:
+        except Exception as e:
             tb = traceback.format_exc().strip().split("\n")
             
             self.__echo.critical("Unable to run '%s'" % commands)
@@ -322,7 +322,7 @@ class Sultan(Base):
 
     def stdin(self, message):
 
-        return raw_input(message)
+        return input(message)
 
     
 class BaseCommand(Base):
@@ -376,7 +376,7 @@ class Command(BaseCommand):
 
         args_str = (" ".join(self.args)).strip()
         kwargs_list = []
-        for k, v in self.kwargs.iteritems():
+        for k, v in self.kwargs.items():
 
             key = None
             value = v
