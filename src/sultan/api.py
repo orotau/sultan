@@ -182,9 +182,11 @@ class Sultan(Base):
             response = stdout.strip().split("\n") if stdout else stdout
             return response
         except Exception, e:
+
+            # start presenting the user with the information
             tb = traceback.format_exc().strip().split("\n")
-            
-            self.__echo.critical("Unable to run '%s'" % commands)
+            self.__echo.critical("Unable to run the following command")
+            self.__echo.critical(commands)
 
             #traceback
             self.__echo.critical("--{ TRACEBACK }" + "-" * 100)
