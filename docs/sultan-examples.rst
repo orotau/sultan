@@ -113,7 +113,7 @@ mode to do this.
 Here is an example::
 
     # runs: sudo su - hodor -c 'cd /home/hodor && ls -lah .;'
-    with Sultan.load(sudo=True, user='hodor', cwd='/home/hodor') as s:
+    with Sultan.load(sudo=True, user='hodor', cwd='/home/hodor') as sultan:
         sultan.ls('-lah', '.')
 
 Example 8: Running as Root
